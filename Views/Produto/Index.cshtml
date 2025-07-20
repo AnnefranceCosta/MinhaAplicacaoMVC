@@ -1,0 +1,44 @@
+@model IEnumerable<MinhaAplicacaoMvc.Models.Produto>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h2>Produtos</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Situação</th>
+            <th>Clientes</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var produto in Model)
+    {
+        var cor = produto.Situacao ? "text-success fw-bold" : "text-danger";
+        <tr>
+            <td>@produto.Nome</td>
+            <td>R$ @produto.Preco.ToString("F2")</td>
+            <td class="@cor">@(produto.Situacao ? "Disponível" : "Indisponível")</td>
+            <td>
+                @if (produto.Clientes != null && produto.Clientes.Any())
+                {
+                    <ul>
+                    @foreach (var cliente in produto.Clientes)
+                    {
+                        <li>@cliente.NomeCompleto</li>
+                    }
+                    </ul>
+                }
+                else
+                {
+                    <span>Nenhum cliente</span>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

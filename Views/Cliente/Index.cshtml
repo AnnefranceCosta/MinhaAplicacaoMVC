@@ -1,0 +1,40 @@
+@model IEnumerable<MinhaAplicacaoMvc.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h2>Clientes</h2>
+
+<a class="btn btn-primary mb-3" href="/Cliente/Create">Cadastrar Novo</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Produto</th>
+            <th>Desconto (%)</th>
+            <th>Vendedor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var cliente in Model)
+    {
+        <tr>
+            <td>@cliente.NomeCompleto</td>
+            <td>@cliente.Telefone</td>
+            <td>@cliente.Email</td>
+            <td>@cliente.Produto?.Nome</td>
+            <td>@cliente.Desconto</td>
+            <td>@cliente.Vendedor</td>
+            <td>
+                <a class="btn btn-primary" href="/Cliente/Edit/@cliente.ClienteId">Editar</a>
+                <a class="btn btn-primary btn-danger" href="/Cliente/Delete/@cliente.ClienteId">Excluir</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
